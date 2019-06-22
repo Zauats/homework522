@@ -14,7 +14,7 @@
         <item>Red</item>
     </string-array>
 
-    <string name="indent_text">change color: </string>
+    <string name="indent_text">change indent: </string>
     <string-array name="indents">
         <item>Small</item>
         <item>Middle</item>

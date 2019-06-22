@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">homework341</string>
+
+    <string name="language_text">выберете язык: </string>
+    <string-array name="languages">
+        <item>Русский</item>
+        <item>Английский</item>
+    </string-array>
+
+    <string name="color_text">выберете цвет: </string>
+    <string-array name="colors">
+        <item>Зеленый</item>
+        <item>Белый</item>
+        <item>Красный</item>
+    </string-array>
+
+    <string name="indent_text">выберете отступ </string>
+    <string-array name="indents">
+        <item>Маленький</item>
+        <item>Средний</item>
+        <item>Большой</item>
+    </string-array>
+
+    <string name="save">Сохранить </string>
+    <string name="text">Дизайнер из меня так себе </string>
+</resources>
