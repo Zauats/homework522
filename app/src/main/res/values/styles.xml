@@ -8,4 +8,37 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppThemeGreen" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryGreen</item>
+        <item name="colorButtonNormal">@color/colorPrimaryDarkGreen</item>
+        <item name="android:background">@color/colorAccentGreen</item>
+        <item name="android:textColor">@color/colorTextGreen</item>
+    </style>
+
+    <style name="AppThemeBlue" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryBlue</item>
+        <item name="colorButtonNormal">@color/colorPrimaryDarkBlue</item>
+        <item name="android:background">@color/colorAccentBlue</item>
+        <item name="android:textColor">@color/colorTextBlue</item>
+    </style>
+
+    <style name="AppThemeRed" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryRed</item>
+        <item name="colorButtonNormal">@color/colorPrimaryDarkRed</item>
+        <item name="android:background">@color/colorAccentRed</item>
+        <item name="android:textColor">@color/colorTextRed</item>
+    </style>
+
+    <style name="Margin1" parent="AppTheme">
+        <item name="android:layout_margin">1dp</item>
+    </style>
+
+    <style name="Margin2" parent="AppTheme">
+        <item name="android:layout_margin">2dp</item>
+    </style>
+
+    <style name="Margin3" parent="AppTheme">
+        <item name="android:layout_margin">3dp</item>
+    </style>
+
 </resources>

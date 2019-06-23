@@ -10,7 +10,7 @@
     <string name="color_text">change color: </string>
     <string-array name="colors">
         <item>Green</item>
-        <item>White</item>
+        <item>Blue</item>
         <item>Red</item>
     </string-array>
 
@@ -22,5 +22,5 @@
     </string-array>
 
     <string name="save">Save </string>
-    <string name="text">I\'m a terrible designer </string>
+    <string name="text">Designer of me so-so </string>
 </resources>

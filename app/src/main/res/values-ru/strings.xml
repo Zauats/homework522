@@ -10,7 +10,7 @@
     <string name="color_text">выберете цвет: </string>
     <string-array name="colors">
         <item>Зеленый</item>
-        <item>Белый</item>
+        <item>Синий</item>
         <item>Красный</item>
     </string-array>
 
