@@ -20,7 +20,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_main);
+
         languageSpinner = findViewById(R.id.languageChange);
         colorSpinner = findViewById((R.id.colorChange));
         indentSpinner = findViewById((R.id.indentChange));
@@ -41,30 +43,33 @@ public class MainActivity extends AppCompatActivity {
         String selectedLanguage = languageSpinner.getSelectedItem().toString();
         String selectedColor = colorSpinner.getSelectedItem().toString();
         String selectedIndent = indentSpinner.getSelectedItem().toString();
-
+        int theme = 0;
+        int margin = 0;
         if (selectedLanguage.equals(languages[0]))
             setlanguage("ru");
         else if (selectedLanguage.equals(languages[1]))
             setlanguage("en");
 
-        if (selectedColor.equals(colors[0])){
-            Utils.changeToTheme(this, Utils.THEME_GREEN);
+        if (selectedIndent.equals(indents[0])){
+            margin =  Utils.MARGIN1;
         }
-        else if (selectedColor.equals(colors[1])){
-            Utils.changeToTheme(this, Utils.THEME_BLUE);
+        else if (selectedIndent.equals(indents[1])){
+            margin =  Utils.MARGIN2;
         }
-        else if (selectedColor.equals(colors[2])){
-            Utils.changeToTheme(this, Utils.THEME_RED);
+        else if (selectedIndent.equals(indents[2])){
+            margin =  Utils.MARGIN3;
         }
 
-        if (selectedIndent.equals(indents[0])){
-            Utils.changeToMargin(this, Utils.MARGIN1);
+        if (selectedColor.equals(colors[0])){
+            theme = Utils.THEME_GREEN;
         }
-        else if (selectedIndent.equals(indents[0])){
-            Utils.changeToMargin(this, Utils.MARGIN2);
+        else if (selectedColor.equals(colors[1])){
+            theme = Utils.THEME_BLUE;
         }
-        else if (selectedIndent.equals(indents[0])){
-            Utils.changeToMargin(this, Utils.MARGIN3);
+        else if (selectedColor.equals(colors[2])){
+            theme = Utils.THEME_RED;
         }
+        Utils.changeToTheme(this, theme, margin);
+
     }
 }

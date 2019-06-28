@@ -10,28 +10,19 @@ public class Utils
     private static int sTheme;
     private static int sMargin;
 
-
-    public final static int THEME_GREEN = 0;
-    public final static int THEME_BLUE = 1;
-    public final static int THEME_RED = 2;
-
     public final static int MARGIN1 = 0;
     public final static int MARGIN2 = 1;
     public final static int MARGIN3 = 2;
 
+    public final static int THEME_GREEN = 0;
+    public final static int THEME_BLUE = 1;
+    public final static int THEME_RED = 2;
     /**
      * Set the theme of the Activity, and restart it by creating a new Activity of the same type.
      */
-    public static void changeToTheme(Activity activity, int theme)
+    public static void changeToTheme(Activity activity, int theme, int margin)
     {
         sTheme = theme;
-        activity.finish();
-
-        activity.startActivity(new Intent(activity, activity.getClass()));
-    }
-
-    public static void changeToMargin(Activity activity, int margin)
-    {
         sMargin = margin;
         activity.finish();
 
@@ -54,11 +45,7 @@ public class Utils
                 activity.setTheme(R.style.AppThemeGreen);
                 break;
         }
-    }
-
-    public static void onActivityCreateSetMargin(Activity activity)
-    {
-        switch (sTheme)
+        switch (sMargin)
         {
             default:
             case MARGIN1:
@@ -72,6 +59,7 @@ public class Utils
                 break;
         }
     }
+
 
 
 }

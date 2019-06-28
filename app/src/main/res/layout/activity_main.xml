@@ -7,7 +7,7 @@
     tools:context=".MainActivity"
     android:id="@+id/main">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,6 +15,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="80dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +32,6 @@
             android:id="@+id/languageChange"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:entries="@array/languages"/>
 
         <TextView
@@ -39,14 +39,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/color_text"
-            android:textSize="20sp"
-            android:layout_marginTop="60dp"/>
+            android:textSize="20sp" />
 
         <Spinner
             android:id="@+id/colorChange"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
             android:entries="@array/colors"/>
 
         <TextView
@@ -54,21 +52,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/indent_text"
-            android:textSize="20sp"
-            android:layout_marginTop="120dp"/>
+            android:textSize="20sp" />
 
         <Spinner
             android:id="@+id/indentChange"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
             android:entries="@array/indents"/>
 
         <Button
             android:id="@+id/saveChanges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="180dp"
             android:text="@string/save"
             android:onClick="Save"/>
 
@@ -76,11 +71,10 @@
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="103dp"
-            android:layout_marginTop="300dp"
             android:text="@string/text"
             android:textSize="30dp" />
 
 
-    </FrameLayout>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
