@@ -49,7 +49,7 @@ public class AutorizeActivity extends AppCompatActivity {
             editor.putString(SETTING_NAME, "false");
             editor.apply();
         }
-        
+
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
         entry = findViewById(R.id.entry);
@@ -81,8 +81,6 @@ public class AutorizeActivity extends AppCompatActivity {
                     AlertDialog alert = builder.create();
                     alert.show();
                 }
-
-
             }
         });
     }
@@ -108,6 +106,9 @@ public class AutorizeActivity extends AppCompatActivity {
     public void openSetting(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        int theme = Integer.parseInt(checkSettining.getString("theme", "2"));
+        int margin = Integer.parseInt(checkSettining.getString("margin", "2"));
+        Utils.changeToTheme(AutorizeActivity.this, theme, margin);
     }
 
     // считывает внутренний файл

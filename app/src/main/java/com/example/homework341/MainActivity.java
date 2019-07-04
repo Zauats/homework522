@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Spinner indentSpinner;
     CheckBox check;
     Activity activity;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         final String SETTING_NAME = "checkBox";
 
         SharedPreferences checkSettining = getSharedPreferences(SETTING_NAME, Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = checkSettining.edit();
+        editor = checkSettining.edit();
         if(!(checkSettining.contains(SETTING_NAME))) {
             editor.putString(SETTING_NAME, "false");
             editor.apply();
@@ -95,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
             theme = Utils.THEME_RED;
         }
         Utils.changeToTheme(this, theme, margin);
+        // сохраняю тему в SharedPreferences
+        editor.putString("theme", Integer.toString(theme));
+        editor.putString("margin", Integer.toString(margin));
+        editor.apply();
         finish();
     }
 }

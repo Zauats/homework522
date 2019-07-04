@@ -25,9 +25,9 @@ public class Utils
         sTheme = theme;
         sMargin = margin;
         // вопрос тут
-        // activity.finish();
-
-        // activity.startActivity(new Intent(activity, activity.getClass()));
+//         activity.finish();
+//
+//         activity.startActivity(new Intent(activity, activity.getClass()));
     }
 
     /** Set the theme of the activity, according to the configuration. */
