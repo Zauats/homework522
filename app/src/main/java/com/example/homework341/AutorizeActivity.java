@@ -106,6 +106,7 @@ public class AutorizeActivity extends AppCompatActivity {
     public void openSetting(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        // меняю тему авторизации тут
         int theme = Integer.parseInt(checkSettining.getString("theme", "2"));
         int margin = Integer.parseInt(checkSettining.getString("margin", "2"));
         Utils.changeToTheme(AutorizeActivity.this, theme, margin);
