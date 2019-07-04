@@ -23,4 +23,5 @@
 
     <string name="save">Сохранить </string>
     <string name="text">Оно рабооотает!!! </string>
+    <string name="check_box_text">Хранить логин во внешнем хранилище</string>
 </resources>

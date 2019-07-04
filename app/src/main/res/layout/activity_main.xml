@@ -74,6 +74,12 @@
             android:text="@string/text"
             android:textSize="30dp" />
 
+        <CheckBox
+            android:id="@+id/check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/check_box_text" />
 
     </LinearLayout>
 

@@ -1,11 +1,15 @@
 package com.example.homework341;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import java.util.List;
@@ -16,16 +20,37 @@ public class MainActivity extends AppCompatActivity {
     Spinner languageSpinner;
     Spinner colorSpinner;
     Spinner indentSpinner;
+    CheckBox check;
     Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_main);
+        final String SETTING_NAME = "checkBox";
+
+        SharedPreferences checkSettining = getSharedPreferences(SETTING_NAME, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = checkSettining.edit();
+        if(!(checkSettining.contains(SETTING_NAME))) {
+            editor.putString(SETTING_NAME, "false");
+            editor.apply();
+        }
 
         languageSpinner = findViewById(R.id.languageChange);
         colorSpinner = findViewById((R.id.colorChange));
         indentSpinner = findViewById((R.id.indentChange));
+        check = findViewById(R.id.check);
+
+        check.setChecked(Boolean.parseBoolean(checkSettining.getString(SETTING_NAME, "false")));
+
+        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                CheckBox check = (CheckBox)buttonView;
+                editor.putString(SETTING_NAME, Boolean.toString(check.isChecked()));
+                editor.apply();
+            }
+        });
     }
 
     public void setlanguage(String language){
@@ -70,6 +95,6 @@ public class MainActivity extends AppCompatActivity {
             theme = Utils.THEME_RED;
         }
         Utils.changeToTheme(this, theme, margin);
-
+        finish();
     }
 }
