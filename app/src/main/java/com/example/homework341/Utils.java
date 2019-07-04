@@ -24,7 +24,7 @@ public class Utils
     {
         sTheme = theme;
         sMargin = margin;
-        // вопрос тут
+        // вопрос  тут
 //         activity.finish();
 //
 //         activity.startActivity(new Intent(activity, activity.getClass()));
