@@ -71,19 +71,21 @@ public class AutorizeActivity extends AppCompatActivity {
                     loginText = readInternalFile(LOGIN_FILE_NAME);
                     passwordText = readInternalFile(PASSWORD_FILE_NAME);
                 }
-
-                if (loginText.equals(login.getText().toString()) & passwordText.equals(password.getText().toString())){
-                    new AlertDialog.Builder(AutorizeActivity.this)
-                            .setMessage(R.string.entry_true)
-                            .setCancelable(false)
-                            .setNegativeButton(R.string.OKButton,
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    })
-                            .create()
-                            .show();
+                
+                if (loginText != null & passwordText != null){
+                    if (loginText.equals(login.getText().toString()) & passwordText.equals(password.getText().toString())){
+                        new AlertDialog.Builder(AutorizeActivity.this)
+                                .setMessage(R.string.entry_true)
+                                .setCancelable(false)
+                                .setNegativeButton(R.string.OKButton,
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                dialog.cancel();
+                                            }
+                                        })
+                                .create()
+                                .show();
+                    }
                 }
             }
         });
