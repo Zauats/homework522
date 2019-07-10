@@ -11,7 +11,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Настройки"
+        android:text="@string/settingButton"
         android:onClick="openSetting"/>
 
     <EditText
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Login" />
+        android:text="@string/login" />
 
     <EditText
         android:id="@+id/password"
@@ -29,19 +29,19 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="Password" />
+        android:text="@string/password" />
 
     <Button
         android:id="@+id/entry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Вход" />
+        android:text="@string/entry" />
 
     <Button
         android:id="@+id/registration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Регистрация"
+        android:text="@string/registration"
         android:onClick="regClick"/>
 
 </LinearLayout>

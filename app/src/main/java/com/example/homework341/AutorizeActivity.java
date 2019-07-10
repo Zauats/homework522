@@ -34,6 +34,8 @@ public class AutorizeActivity extends AppCompatActivity {
     Button entry;
     Button registration;
     Boolean saveFile;
+    String PASSWORD_FILE_NAME = "password";
+    String LOGIN_FILE_NAME = "login";
 
     String SETTING_NAME = "checkBox";
     SharedPreferences checkSettining;
@@ -59,27 +61,29 @@ public class AutorizeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveFile = Boolean.parseBoolean(checkSettining.getString(SETTING_NAME, "false"));
-                String loginAndPassword = "";
+                String loginText = "";
+                String passwordText = "";
 
                 if (!saveFile){
-                    loginAndPassword = readInternalFile();
+                    loginText = readInternalFile(LOGIN_FILE_NAME);
+                    passwordText = readInternalFile(PASSWORD_FILE_NAME);
                 }else{
-                    loginAndPassword = readExternalFile();
+                    loginText = readInternalFile(LOGIN_FILE_NAME);
+                    passwordText = readInternalFile(PASSWORD_FILE_NAME);
                 }
 
-                if (loginAndPassword.equals(login.getText().toString() + " " + password.getText().toString())){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(AutorizeActivity.this);
-                    builder.setTitle("Важное сообщение!")
-                            .setMessage("вы вошли!")
+                if (loginText.equals(login.getText().toString()) & passwordText.equals(password.getText().toString())){
+                    new AlertDialog.Builder(AutorizeActivity.this)
+                            .setMessage(R.string.entry_true)
                             .setCancelable(false)
-                            .setNegativeButton("ОК",
+                            .setNegativeButton(R.string.OKButton,
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
                                             dialog.cancel();
                                         }
-                                    });
-                    AlertDialog alert = builder.create();
-                    alert.show();
+                                    })
+                            .create()
+                            .show();
                 }
             }
         });
@@ -88,16 +92,18 @@ public class AutorizeActivity extends AppCompatActivity {
     //обработка кнопки регистрации
     public void regClick(View view){
         if (password.getText().toString().equals("") | login.getText().toString().equals("")){
-            Toast toast = Toast.makeText(this, "Введите что-нибудь", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, R.string.indication, Toast.LENGTH_LONG);
             toast.show();
         }else{
             saveFile = Boolean.parseBoolean(checkSettining.getString(SETTING_NAME, "false"));
             if (!saveFile){
-                saveInternalFile();
+                saveInternalFile(LOGIN_FILE_NAME, login.getText().toString());
+                saveInternalFile(PASSWORD_FILE_NAME, password.getText().toString());
             }else{
-                saveExternalFile();
+                saveExternalFile(LOGIN_FILE_NAME, login.getText().toString());
+                saveExternalFile(PASSWORD_FILE_NAME, password.getText().toString());
             }
-            Toast toast = Toast.makeText(this, "Регистрация прошла успешно", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, R.string.registrtion_true, Toast.LENGTH_LONG);
             toast.show();
         }
     }
@@ -113,51 +119,52 @@ public class AutorizeActivity extends AppCompatActivity {
     }
 
     // считывает внутренний файл
-    private String readInternalFile(){
-        FileInputStream fileInputStream = null;
+    private String readInternalFile(String fileName){
+        BufferedReader reader = null;
         try {
-            fileInputStream = openFileInput("login_and_password");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-        BufferedReader reader = new BufferedReader(inputStreamReader);
-        String loginAndPassword = "";
-        try {
-            loginAndPassword = reader.readLine();
+            reader = new BufferedReader(new InputStreamReader(openFileInput(fileName)));
+            return reader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return loginAndPassword;
     }
 
     // сохраняет внутренний файл
-    private void saveInternalFile(){
-        FileOutputStream fileOutputStream = null;
+    private void saveInternalFile(String fileName, String info){
+        BufferedWriter writer = null;
         try {
-            fileOutputStream = openFileOutput("login_and_password", MODE_PRIVATE);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
-        BufferedWriter bw = new BufferedWriter(outputStreamWriter);
-        try {
-            bw.write(login.getText().toString() + " " + password.getText().toString());
-            bw.close();
+            writer = new BufferedWriter(new OutputStreamWriter(openFileOutput(fileName, MODE_PRIVATE)));
+            writer.write(info);
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (writer != null) {
+                    writer.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     // считывает внешний файл
-    private String readExternalFile(){
+    private String readExternalFile(String fileName){
         if(!checkPermissions()){
             return "";
         }
         String text = "";
         FileInputStream fin = null;
-        File file = getExternalPath();
+        File file = getExternalPath(fileName);
 
         if(!file.exists()) return "";
         try {
@@ -185,14 +192,14 @@ public class AutorizeActivity extends AppCompatActivity {
     }
 
     // сохраняет внешний файл
-    private void saveExternalFile(){
+    private void saveExternalFile(String fileName, String info){
         if(!checkPermissions()){
             return;
         }
         FileOutputStream fos = null;
         try {
-            String text = login.getText().toString() + " " + password.getText().toString();
-            fos = new FileOutputStream(getExternalPath());
+            String text = info;
+            fos = new FileOutputStream(getExternalPath(fileName));
             fos.write(text.getBytes());
         }
         catch(IOException ex) {
@@ -212,7 +219,7 @@ public class AutorizeActivity extends AppCompatActivity {
     private boolean checkPermissions(){
 
         if(!isExternalStorageReadable() || !isExternalStorageWriteable()){
-            Toast.makeText(this, "Внешнее хранилище не доступно", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.alert1, Toast.LENGTH_LONG).show();
             return false;
         }
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -237,7 +244,7 @@ public class AutorizeActivity extends AppCompatActivity {
     }
 
     // получение пути к файлу
-    private File getExternalPath() {
-        return(new File(Environment.getExternalStorageDirectory(), "login_and_password"));
+    private File getExternalPath(String fileName) {
+        return(new File(Environment.getExternalStorageDirectory(), fileName));
     }
 }

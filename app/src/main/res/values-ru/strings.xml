@@ -24,4 +24,14 @@
     <string name="save">Сохранить </string>
     <string name="text">Оно рабооотает!!! </string>
     <string name="check_box_text">Хранить логин во внешнем хранилище</string>
+    <string name="alert1">Внешнее хранилище не доступно</string>
+    <string name="registrtion_true">регистрация прошла успешно</string>
+    <string name="indication">Введите что-нибудь</string>
+    <string name="entry_true">Вы вошли</string>
+    <string name="OKButton">ОК</string>
+    <string name="settingButton">Настройки</string>
+    <string name="password">password</string>
+    <string name="login">login</string>
+    <string name="entry">Вход</string>
+    <string name="registration">Регистрация</string>
 </resources>
