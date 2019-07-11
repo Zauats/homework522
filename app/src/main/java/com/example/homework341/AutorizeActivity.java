@@ -71,7 +71,7 @@ public class AutorizeActivity extends AppCompatActivity {
                     loginText = readInternalFile(LOGIN_FILE_NAME);
                     passwordText = readInternalFile(PASSWORD_FILE_NAME);
                 }
-                
+
                 if (loginText != null & passwordText != null){
                     if (loginText.equals(login.getText().toString()) & passwordText.equals(password.getText().toString())){
                         new AlertDialog.Builder(AutorizeActivity.this)
