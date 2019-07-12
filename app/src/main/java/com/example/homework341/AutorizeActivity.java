@@ -68,8 +68,8 @@ public class AutorizeActivity extends AppCompatActivity {
                     loginText = readInternalFile(LOGIN_FILE_NAME);
                     passwordText = readInternalFile(PASSWORD_FILE_NAME);
                 }else{
-                    loginText = readInternalFile(LOGIN_FILE_NAME);
-                    passwordText = readInternalFile(PASSWORD_FILE_NAME);
+                    loginText = readExternalFile(LOGIN_FILE_NAME);
+                    passwordText = readExternalFile(PASSWORD_FILE_NAME);
                 }
 
                 if (loginText != null & passwordText != null){
@@ -85,7 +85,12 @@ public class AutorizeActivity extends AppCompatActivity {
                                         })
                                 .create()
                                 .show();
+                    }else{
+                        Toast.makeText(AutorizeActivity.this, R.string.alert2, Toast.LENGTH_LONG).show();
                     }
+                }
+                else{
+                    Toast.makeText(AutorizeActivity.this, R.string.alert2, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -160,37 +165,25 @@ public class AutorizeActivity extends AppCompatActivity {
     }
 
     // считывает внешний файл
-    private String readExternalFile(String fileName){
-        if(!checkPermissions()){
-            return "";
-        }
-        String text = "";
-        FileInputStream fin = null;
-        File file = getExternalPath(fileName);
-
-        if(!file.exists()) return "";
+    public String readExternalFile(String fileName) {
+        FileInputStream fis = null;
         try {
-            fin =  new FileInputStream(file);
-            byte[] bytes = new byte[fin.available()];
-            fin.read(bytes);
-            text = new String (bytes);
-        }
-        catch(IOException ex) {
-
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        finally{
-
-            try{
-                if(fin!=null)
-                    fin.close();
-            }
-            catch(IOException ex){
-
-                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            fis = new FileInputStream(fileName);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+            return br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(AutorizeActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+            return null;
+        } finally {
+            try {
+                if (fis != null) {
+                    fis.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        return text;
     }
 
     // сохраняет внешний файл
