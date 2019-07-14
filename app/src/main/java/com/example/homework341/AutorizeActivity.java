@@ -56,6 +56,24 @@ public class AutorizeActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
         entry = findViewById(R.id.entry);
         registration = findViewById(R.id.registration);
+        Button setting = findViewById(R.id.buttonSetting);
+        Button regButton = findViewById(R.id.buttonSetting);
+
+        regButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                regClick();
+            }
+        });
+
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSetting();
+            }
+        });
+
+
 
         entry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +115,7 @@ public class AutorizeActivity extends AppCompatActivity {
     }
 
     //обработка кнопки регистрации
-    public void regClick(View view){
+    public void regClick(){
         if (password.getText().toString().equals("") | login.getText().toString().equals("")){
             Toast toast = Toast.makeText(this, R.string.indication, Toast.LENGTH_LONG);
             toast.show();
@@ -116,7 +134,7 @@ public class AutorizeActivity extends AppCompatActivity {
     }
 
     // кнопка открытия настроек
-    public void openSetting(View view){
+    public void openSetting(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         // меняю тему авторизации тут

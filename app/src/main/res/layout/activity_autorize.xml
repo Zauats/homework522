@@ -8,11 +8,10 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/settingButton"
-        android:onClick="openSetting"/>
+        android:text="@string/settingButton" />
 
     <EditText
         android:layout_marginTop="240dp"
@@ -41,7 +40,6 @@
         android:id="@+id/registration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/registration"
-        android:onClick="regClick"/>
+        android:text="@string/registration" />
 
 </LinearLayout>
