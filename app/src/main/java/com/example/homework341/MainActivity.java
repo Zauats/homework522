@@ -23,17 +23,18 @@ public class MainActivity extends AppCompatActivity {
     CheckBox check;
     Activity activity;
     SharedPreferences.Editor editor;
+
+    public static String SETTING_NAME = "checkBox";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_main);
-        final String SETTING_NAME = "checkBox";
 
         SharedPreferences checkSettining = getSharedPreferences(SETTING_NAME, Context.MODE_PRIVATE);
         editor = checkSettining.edit();
         if(!(checkSettining.contains(SETTING_NAME))) {
-            editor.putString(SETTING_NAME, "false");
+            editor.putBoolean(SETTING_NAME, false);
             editor.apply();
         }
 
@@ -42,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
         indentSpinner = findViewById((R.id.indentChange));
         check = findViewById(R.id.check);
 
-        check.setChecked(Boolean.parseBoolean(checkSettining.getString(SETTING_NAME, "false")));
+        check.setChecked(checkSettining.getBoolean(SETTING_NAME, false));
 
         check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 CheckBox check = (CheckBox)buttonView;
-                editor.putString(SETTING_NAME, Boolean.toString(check.isChecked()));
+                editor.putBoolean(SETTING_NAME, check.isChecked());
                 editor.apply();
             }
         });

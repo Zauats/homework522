@@ -29,26 +29,26 @@ import java.io.OutputStreamWriter;
 
 public class AutorizeActivity extends AppCompatActivity {
 
-    EditText password;
-    EditText login;
+    private EditText password;
+    private EditText login;
     Button entry;
     Button registration;
     Boolean saveFile;
-    String PASSWORD_FILE_NAME = "password";
-    String LOGIN_FILE_NAME = "login";
+    private String PASSWORD_FILE_NAME = "password";
+    private String LOGIN_FILE_NAME = "login";
 
-    String SETTING_NAME = "checkBox";
-    SharedPreferences checkSettining;
+
+    private SharedPreferences checkSettining;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_autorize);
 
-        checkSettining = getSharedPreferences(SETTING_NAME, Context.MODE_PRIVATE);
+        checkSettining = getSharedPreferences(MainActivity.SETTING_NAME, Context.MODE_PRIVATE);
 
         final SharedPreferences.Editor editor = checkSettining.edit();
-        if(!(checkSettining.contains(SETTING_NAME))) {
-            editor.putString(SETTING_NAME, "false");
+        if(!(checkSettining.contains(MainActivity.SETTING_NAME))) {
+            editor.putBoolean(MainActivity.SETTING_NAME, false);
             editor.apply();
         }
 
@@ -57,7 +57,7 @@ public class AutorizeActivity extends AppCompatActivity {
         entry = findViewById(R.id.entry);
         registration = findViewById(R.id.registration);
         Button setting = findViewById(R.id.buttonSetting);
-        Button regButton = findViewById(R.id.buttonSetting);
+        Button regButton = findViewById(R.id.registration);
 
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,11 +78,10 @@ public class AutorizeActivity extends AppCompatActivity {
         entry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveFile = Boolean.parseBoolean(checkSettining.getString(SETTING_NAME, "false"));
                 String loginText = "";
                 String passwordText = "";
 
-                if (!saveFile){
+                if (!checkSettining.getBoolean(MainActivity.SETTING_NAME, false)){
                     loginText = readInternalFile(LOGIN_FILE_NAME);
                     passwordText = readInternalFile(PASSWORD_FILE_NAME);
                 }else{
@@ -120,8 +119,7 @@ public class AutorizeActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(this, R.string.indication, Toast.LENGTH_LONG);
             toast.show();
         }else{
-            saveFile = Boolean.parseBoolean(checkSettining.getString(SETTING_NAME, "false"));
-            if (!saveFile){
+            if (!checkSettining.getBoolean(MainActivity.SETTING_NAME, false)){
                 saveInternalFile(LOGIN_FILE_NAME, login.getText().toString());
                 saveInternalFile(PASSWORD_FILE_NAME, password.getText().toString());
             }else{
